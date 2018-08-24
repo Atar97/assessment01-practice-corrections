@@ -94,10 +94,10 @@ class Array
     prc = Proc.new {|el1, el2| el1 <=> el2} unless prc
     return self if length <= 1
     left, right = self.take(length/2), self.drop(length/2)
-    Array.merge(left.merge_sort, right.merge_sort, &prc)
+    Array.merge(left.merge_sort(&prc), right.merge_sort(&prc), &prc)
   end
 
-  private
+
   def self.merge(left, right, &prc)
     ret = []
     until left.empty? || right.empty?
@@ -107,7 +107,6 @@ class Array
         ret << right.shift
       end
     end
-    
     ret + left + right
   end
 end
